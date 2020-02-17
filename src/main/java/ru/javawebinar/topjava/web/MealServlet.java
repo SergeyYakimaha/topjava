@@ -17,6 +17,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class MealServlet extends HttpServlet {
     private static final Logger log = getLogger(MealServlet.class);
 
+    //Test commit HW01_01
     private MapMealDAOImpl mealDao;
 
     @Override
