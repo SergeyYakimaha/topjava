@@ -18,6 +18,7 @@ public class MealServlet extends HttpServlet {
     private static final Logger log = getLogger(MealServlet.class);
 
     //Test commit HW01_01
+    //Test commit HW01_02
     private MapMealDAOImpl mealDao;
 
     @Override
