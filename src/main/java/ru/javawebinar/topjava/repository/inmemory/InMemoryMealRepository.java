@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryMealRepository implements MealRepository {
@@ -47,7 +48,7 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public Collection<Meal> getAll(Integer userId) {
-        return repository.values();
+        return repository.values().stream().filter(meal -> meal.getUserId() == userId).collect(Collectors.toList());
     }
 
 }

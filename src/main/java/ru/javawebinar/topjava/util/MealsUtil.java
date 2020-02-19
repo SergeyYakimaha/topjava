@@ -19,29 +19,29 @@ public class MealsUtil {
     public static final int DEFAULT_CALORIES_PER_DAY = 2000;
 
     public static final List<Meal> MEALS = Arrays.asList(
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500, 1),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000, 1),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500, 1),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 100, 1),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000, 1),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 500, 1),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410, 1),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "1_Завтрак", 500, 1),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "1_Обед", 1000, 1),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "1_Ужин", 500, 1),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "1_Еда на граничное значение", 100, 1),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "1_Завтрак", 1000, 1),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "1_Обед", 500, 1),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "1_Ужин", 410, 1),
 
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500, 2),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000, 2),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500, 2),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 100, 2),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000, 2),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 500, 2),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410, 2),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "2_Завтрак", 500, 2),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "2_Обед", 1000, 2),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "2_Ужин", 500, 2),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "2_Еда на граничное значение", 100, 2),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "2_Завтрак", 1000, 2),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "2_Обед", 500, 2),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "2_Ужин", 410, 2),
 
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500, 3),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000, 3),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500, 3),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 100, 3),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000, 3),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 500, 3),
-            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410, 3)
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "3_Завтрак", 500, 3),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "3_Обед", 1000, 3),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "3_Ужин", 500, 3),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "3_Еда на граничное значение", 100, 3),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "3_Завтрак", 1000, 3),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "3_Обед", 500, 3),
+            new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "3_Ужин", 410, 3)
     );
 
     public static List<MealTo> getTos(Collection<Meal> meals, int caloriesPerDay) {

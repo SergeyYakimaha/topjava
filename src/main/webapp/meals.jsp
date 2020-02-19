@@ -21,14 +21,37 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h2>Meals</h2>
+    <hr/>
+    <form method="get" action="filters">
+        <table>
+            <thead>
+            <tr>
+                <th>Date from</th>
+                <th>Date to</th>
+                <th>Time from</th>
+                <th>Time to</th>
+            </tr>
+            </thead>
+            <tr>
+                <td><input type="date" name="startDate"></td>
+                <td><input type="date" name="endDate"></td>
+                <td><input type="time" name="startTime"></td>
+                <td><input type="time" name="endTime"></td>
+            </tr>
+        </table>
+        <button type="submit">Filter</button>
+    </form>
+    <hr/>
     <a href="meals?action=create">Add Meal</a>
     <br><br>
+    <hr/>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
             <th>Date</th>
             <th>Description</th>
             <th>Calories</th>
+            <th>UserId</th>
             <th></th>
             <th></th>
         </tr>
@@ -45,6 +68,7 @@
                 </td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
+                <td>${meal.userId}</td>
                 <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
                 <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
             </tr>
