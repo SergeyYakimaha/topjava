@@ -13,9 +13,9 @@ import java.util.List;
 
 public class UsersUtil {
     public static final List<User> USERS = Arrays.asList(
-            new User("User 1", "1", "user1@gmail.com"),
-            new User("User 2", "2", "user2@gmail.com"),
-            new User("User 3", "3", "user3@gmail.com")
+            new User("User 1", "user1@gmail.com", "1"),
+            new User("User 2", "user2@gmail.com", "2"),
+            new User("User 3", "user3@gmail.com", "3")
     );
 
     public static List<UserTo> getTos(Collection<User> users) {

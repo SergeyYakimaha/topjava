@@ -59,7 +59,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        SecurityUtil.setAuthUserId(getId(req));
+        resp.sendRedirect(this.getServletContext().getContextPath());
     }
 
     private int getId(HttpServletRequest request) {
