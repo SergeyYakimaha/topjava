@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava;
 
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.model.User;
 
 import java.time.Month;
 import java.util.Arrays;
@@ -33,5 +34,5 @@ public class MealTestData {
         return new Meal(MEAL1_ID, MEAL1.getDateTime(), "Обновленный завтрак", 200);
     }
 
-    public static TestMatcher<Meal> MEAL_MATCHER = TestMatcher.of();
+    public static TestMatcher<Meal> MEAL_MATCHER = TestMatcher.of("user");
 }

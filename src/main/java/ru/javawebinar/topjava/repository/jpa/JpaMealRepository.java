@@ -19,8 +19,17 @@ public class JpaMealRepository implements MealRepository {
     private EntityManager em;
 
     @Override
+    @Transactional
     public Meal save(Meal meal, int userId) {
-        return null;
+        User ref = em.getReference(User.class, userId);
+        meal.setUser(ref);
+
+        if (meal.isNew()) {
+            em.persist(meal);
+            return meal;
+        } else {
+            return em.merge(meal);
+        }
     }
 
     @Override
@@ -42,6 +51,9 @@ public class JpaMealRepository implements MealRepository {
 
     @Override
     public List<Meal> getAll(int userId) {
+        List<Meal> list = em.createNamedQuery(Meal.ALL_SORTED, Meal.class)
+                .setParameter("userId", userId)
+                .getResultList();
         return em.createNamedQuery(Meal.ALL_SORTED, Meal.class)
                 .setParameter("userId", userId)
                 .getResultList();
