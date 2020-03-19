@@ -33,4 +33,9 @@
         <property name="basenames" value="file:///#{systemEnvironment['TOPJAVA_ROOT']}/config/messages/app"/>
         <property name="fallbackToSystemLocale" value="false"/>
     </bean>
+
+    <bean id="appServletBean" class="ru.javawebinar.topjava.bean_test.ServletContextBean">
+        <property name="id" value="20"/>
+        <property name="name" value="servletContextBeanName" />
+    </bean>
 </beans>

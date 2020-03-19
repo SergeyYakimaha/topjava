@@ -17,4 +17,10 @@
     <!--<context:annotation-config/>-->
 
     <context:component-scan base-package="ru.javawebinar.**.service"/>
+
+    <bean id="appContextBean" class="ru.javawebinar.topjava.bean_test.AppContextBean">
+        <property name="id" value="10"/>
+        <property name="name" value="appContextBeanName" />
+    </bean>
+
 </beans>
