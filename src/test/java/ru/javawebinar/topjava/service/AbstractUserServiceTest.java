@@ -1,11 +1,16 @@
 package ru.javawebinar.topjava.service;
 
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
+import org.springframework.test.context.ActiveProfiles;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.JpaUtil;
@@ -13,10 +18,12 @@ import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import static ru.javawebinar.topjava.Profiles.*;
 import static ru.javawebinar.topjava.UserTestData.*;
 
 public abstract class AbstractUserServiceTest extends AbstractServiceTest {
@@ -31,12 +38,17 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     private CacheManager cacheManager;
 
     @Autowired
+    private Environment environment;
+
+    @Autowired(required = false)
     protected JpaUtil jpaUtil;
 
     @Before
     public void setUp() throws Exception {
-        cacheManager.getCache("users").clear();
-        jpaUtil.clear2ndLevelHibernateCache();
+        if (!Arrays.asList(environment.getActiveProfiles()).contains(JDBC)) {
+            cacheManager.getCache("users").clear();
+            jpaUtil.clear2ndLevelHibernateCache();
+        }
     }
 
     @Test
@@ -67,6 +79,12 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     @Test
     public void get() throws Exception {
         User user = service.get(USER_ID);
+        USER_MATCHER.assertMatch(user, USER);
+    }
+
+    @Test
+    public void getUserWithRoles() throws Exception {
+        User user = service.getWithRoles(ADMIN_ID);
         USER_MATCHER.assertMatch(user, USER);
     }
 

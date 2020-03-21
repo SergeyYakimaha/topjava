@@ -55,4 +55,8 @@ public class UserService {
     public User getWithMeals(int id) {
         return checkNotFoundWithId(repository.getWithMeals(id), id);
     }
+
+    public User getWithRoles(int id) {
+        return checkNotFoundWithId(repository.getWithRoles(id), id);
+    }
 }

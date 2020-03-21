@@ -8,10 +8,13 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class JdbcUserRepository implements UserRepository {
@@ -70,5 +73,20 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public List<User> getAll() {
         return jdbcTemplate.query("SELECT * FROM users ORDER BY name, email", ROW_MAPPER);
+    }
+
+    @Override
+    public User getWithRoles(int id) {
+        User user = get(id);
+        List<String> listRoles = jdbcTemplate.queryForList("SELECT ur.role FROM user_roles ur WHERE ur.user_id=?", String.class, id);
+        Set<Role> roles = listRoles.stream().map(Role::valueOf).collect(Collectors.toSet());
+        user.setRoles(roles);
+        return save(user);
+    }
+
+    @Transactional
+    public User addUserRoles(int id, Role role) {
+        User user = getWithRoles(id);
+        return null;
     }
 }

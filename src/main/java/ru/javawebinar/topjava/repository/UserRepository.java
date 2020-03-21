@@ -22,4 +22,8 @@ public interface UserRepository {
     default User getWithMeals(int id) {
         throw new UnsupportedOperationException();
     }
+
+    default User getWithRoles(int id) {
+        throw new UnsupportedOperationException();
+    }
 }

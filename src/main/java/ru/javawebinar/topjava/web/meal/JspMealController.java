@@ -23,11 +23,13 @@ import static ru.javawebinar.topjava.util.ValidationUtil.assureIdConsistent;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
 
 @Controller
+@RequestMapping("/meals")
 public class JspMealController {
+
     @Autowired
     private MealService mealService;
 
-    @GetMapping("/meals")
+    @GetMapping()
     public String getMeals(Model model) {
         int userId = SecurityUtil.authUserId();
         List<MealTo> mealToList = MealsUtil.getTos(mealService.getAll(userId), SecurityUtil.authUserCaloriesPerDay());
@@ -35,27 +37,27 @@ public class JspMealController {
         return "meals";
     }
 
-    @GetMapping("/meals/add")
+    @GetMapping("/add")
     public String showAddUserForm(Model model) {
         Meal meal = new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000);
         model.addAttribute("meal", meal);
         return "mealForm";
     }
 
-    @GetMapping("/meals/{id}/update")
+    @GetMapping("/{id}/update")
     public String showUpdateUserForm(@PathVariable int id, Model model) {
         Meal meal = mealService.get(id, SecurityUtil.authUserId());
         model.addAttribute("meal", meal);
         return "mealForm";
     }
 
-    @GetMapping("/meals/{id}/delete")
+    @GetMapping("/{id}/delete")
     public String deleteMeal(@PathVariable int id) {
         mealService.delete(id, SecurityUtil.authUserId());
         return "redirect:/meals";
     }
 
-    @PostMapping("/meals/**")
+    @PostMapping(value={"/add", "*/update"})
     public String saveOrUpdateMeal(HttpServletRequest request) {
         Meal meal = new Meal(
                 LocalDateTime.parse(request.getParameter("dateTime")),
