@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.repository.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -13,6 +14,8 @@ import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -84,9 +87,42 @@ public class JdbcUserRepository implements UserRepository {
         return save(user);
     }
 
-    @Transactional
-    public User addUserRoles(int id, Role role) {
-        User user = getWithRoles(id);
-        return null;
+    public User addUserRoles(int id, Set<Role> roles) {
+        List<Role> roleList = new ArrayList<>(roles);
+
+        jdbcTemplate.batchUpdate("INSERT INTO user_roles (user_id, role) VALUES (?,?)", new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
+                preparedStatement.setInt(1, id);
+                preparedStatement.setString(2, roleList.get(i).toString());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return roleList.size();
+            }
+        });
+
+        return getWithRoles(id);
+    }
+
+
+    public User deleteUserRoles(int id, Set<Role> roles) {
+        List<Role> roleList = new ArrayList<>(roles);
+
+        jdbcTemplate.batchUpdate("DELETE FROM user_roles ur WHERE ur.user_id=? AND ur.role=?", new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
+                preparedStatement.setInt(1, id);
+                preparedStatement.setString(2, roleList.get(i).toString());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return roleList.size();
+            }
+        });
+
+        return getWithRoles(id);
     }
 }

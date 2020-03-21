@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ActiveProfiles;
+import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.JpaUtil;
@@ -18,10 +19,7 @@ import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static ru.javawebinar.topjava.Profiles.*;
 import static ru.javawebinar.topjava.UserTestData.*;
@@ -86,6 +84,12 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     public void getUserWithRoles() throws Exception {
         User user = service.getWithRoles(ADMIN_ID);
         USER_MATCHER.assertMatch(user, USER);
+    }
+
+    @Test
+    public void addUserRoles() throws Exception {
+        User postUser = service.addUserRoles(ADMIN_ID, new HashSet<>(Arrays.asList(ROLE_GOD, ROLE_CONTROLLER)));
+        ROLE_MATCHER.assertMatch(service.getWithRoles(ADMIN_ID).getRoles(), ROLE_ADMIN, ROLE_GOD, ROLE_CONTROLLER);
     }
 
     @Test(expected = NotFoundException.class)

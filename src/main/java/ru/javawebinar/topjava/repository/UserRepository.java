@@ -1,8 +1,10 @@
 package ru.javawebinar.topjava.repository;
 
+import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserRepository {
     // null if not found, when updated
@@ -24,6 +26,14 @@ public interface UserRepository {
     }
 
     default User getWithRoles(int id) {
+        throw new UnsupportedOperationException();
+    }
+
+    default User addUserRoles(int id, Set<Role> roles) {
+        throw new UnsupportedOperationException();
+    }
+
+    default User deleteUserRoles(int id, Set<Role> roles) {
         throw new UnsupportedOperationException();
     }
 }
