@@ -76,8 +76,8 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
 
     @Test
     public void get() throws Exception {
-        User user = service.get(USER_ID);
-        USER_MATCHER.assertMatch(user, USER);
+        User user = service.get(ADMIN_ID);
+        USER_MATCHER.assertMatch(user, ADMIN);
     }
 
     @Test(expected = NotFoundException.class)
@@ -101,7 +101,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     @Test
     public void getAll() throws Exception {
         List<User> all = service.getAll();
-        USER_MATCHER.assertMatch(all, ADMIN, USER);
+        USER_MATCHER.assertMatch(all, ADMIN, USER, CONTROLLER);
     }
 
     @Test

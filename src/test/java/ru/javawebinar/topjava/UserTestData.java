@@ -14,18 +14,15 @@ public class UserTestData {
 
     public static final int USER_ID = START_SEQ;
     public static final int ADMIN_ID = START_SEQ + 1;
-    public static final int USER_1 = START_SEQ + 2;
-    public static final int USER_2 = START_SEQ + 3;
-    public static final int USER_3 = START_SEQ + 4;
+    public static final int CONTROLLER_ID = START_SEQ + 2;
 
     public static final Role ROLE_ADMIN = Role.ROLE_ADMIN;
     public static final Role ROLE_USER = Role.ROLE_USER;
     public static final Role ROLE_CONTROLLER = Role.ROLE_CONTROLLER;
-    public static final Role ROLE_EDITOR = Role.ROLE_EDITOR;
-    public static final Role ROLE_GOD = Role.ROLE_GOD;
 
     public static final User USER = new User(USER_ID, "User", "user@yandex.ru", "password", Role.ROLE_USER);
-    public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN,Role.ROLE_USER, Role.ROLE_GOD);
+    public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN,Role.ROLE_USER, Role.ROLE_CONTROLLER);
+    public static final User CONTROLLER = new User(CONTROLLER_ID, "Controller", "controller@gmail.com", "controller", Role.ROLE_CONTROLLER);
 
     public static User getNew() {
         return new User(null, "New", "new@gmail.com", "newPass", 1555, false, new Date(), Collections.singleton(Role.ROLE_USER));
