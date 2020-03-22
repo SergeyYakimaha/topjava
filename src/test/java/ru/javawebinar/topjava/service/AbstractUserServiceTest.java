@@ -80,18 +80,6 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
         USER_MATCHER.assertMatch(user, USER);
     }
 
-    @Test
-    public void getUserWithRoles() throws Exception {
-        User user = service.getWithRoles(ADMIN_ID);
-        USER_MATCHER.assertMatch(user, USER);
-    }
-
-    @Test
-    public void addUserRoles() throws Exception {
-        User postUser = service.addUserRoles(ADMIN_ID, new HashSet<>(Arrays.asList(ROLE_GOD, ROLE_CONTROLLER)));
-        ROLE_MATCHER.assertMatch(service.getWithRoles(ADMIN_ID).getRoles(), ROLE_ADMIN, ROLE_GOD, ROLE_CONTROLLER);
-    }
-
     @Test(expected = NotFoundException.class)
     public void getNotFound() throws Exception {
         service.get(1);

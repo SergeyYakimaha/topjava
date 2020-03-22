@@ -36,4 +36,5 @@ public interface UserRepository {
     default User deleteUserRoles(int id, Set<Role> roles) {
         throw new UnsupportedOperationException();
     }
+
 }

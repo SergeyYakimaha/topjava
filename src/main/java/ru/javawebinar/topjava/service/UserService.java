@@ -59,10 +59,6 @@ public class UserService {
         return checkNotFoundWithId(repository.getWithMeals(id), id);
     }
 
-    public User getWithRoles(int id) {
-        return checkNotFoundWithId(repository.getWithRoles(id), id);
-    }
-
     @Transactional
     public User addUserRoles(int id, Set<Role> roles) {
         return checkNotFoundWithId(repository.addUserRoles(id, roles), id);
