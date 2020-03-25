@@ -25,16 +25,4 @@ public interface UserRepository {
         throw new UnsupportedOperationException();
     }
 
-    default User getWithRoles(int id) {
-        throw new UnsupportedOperationException();
-    }
-
-    default User addUserRoles(int id, Set<Role> roles) {
-        throw new UnsupportedOperationException();
-    }
-
-    default User deleteUserRoles(int id, Set<Role> roles) {
-        throw new UnsupportedOperationException();
-    }
-
 }

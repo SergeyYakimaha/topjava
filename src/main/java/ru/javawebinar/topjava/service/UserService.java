@@ -58,14 +58,4 @@ public class UserService {
     public User getWithMeals(int id) {
         return checkNotFoundWithId(repository.getWithMeals(id), id);
     }
-
-    @Transactional
-    public User addUserRoles(int id, Set<Role> roles) {
-        return checkNotFoundWithId(repository.addUserRoles(id, roles), id);
-    }
-
-    @Transactional
-    public User deleteUserRoles(int id, Set<Role> roles) {
-        return checkNotFoundWithId(repository.deleteUserRoles(id, roles), id);
-    }
 }

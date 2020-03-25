@@ -16,32 +16,32 @@
     <form method="get" action="meals">
         <input type="hidden" name="action" value="filter">
         <dl>
-            <dt>From Date:</dt>
+            <dt><spring:message code="mealFilter.startDate" /></dt>
             <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
         </dl>
         <dl>
-            <dt>To Date:</dt>
+            <dt><spring:message code="mealFilter.endDate" /></dt>
             <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
         </dl>
         <dl>
-            <dt>From Time:</dt>
+            <dt><spring:message code="mealFilter.startTime" /></dt>
             <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
         </dl>
         <dl>
-            <dt>To Time:</dt>
+            <dt><spring:message code="mealFilter.endTime" /></dt>
             <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
         </dl>
-        <button type="submit">Filter</button>
+        <button type="submit"><spring:message code="common.filter" /></button>
     </form>
     <hr/>
-    <a href="meals/add">Add Meal</a>
+    <a href="meals/add"><spring:message code="meal.add" /></a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Calories</th>
+            <th><spring:message code="meal.dateTime" /></th>
+            <th><spring:message code="meal.description" /></th>
+            <th><spring:message code="meal.calories" /></th>
             <th></th>
             <th></th>
         </tr>
@@ -60,8 +60,8 @@
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
 
-                <td><button class="btn btn-info" onclick="location.href='${updateUrl}'">Update</button></td>
-                <td><button class="btn btn-info" onclick="location.href='${deleteUrl}'">Delete</button></td>
+                <td><button class="btn btn-info" onclick="location.href='${updateUrl}'"><spring:message code="meal.edit" /></button></td>
+                <td><button class="btn btn-info" onclick="location.href='${deleteUrl}'"><spring:message code="meal.delete" /></button></td>
 
 <%--                <form:form method="DELETE">--%>
 <%--                    <td><button class="btn btn-info" >Delete</button></td>--%>
