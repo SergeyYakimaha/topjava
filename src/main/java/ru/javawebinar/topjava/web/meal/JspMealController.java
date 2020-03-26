@@ -14,11 +14,17 @@ import ru.javawebinar.topjava.web.SecurityUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpRequest;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
+import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalDate;
+import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalTime;
 import static ru.javawebinar.topjava.util.ValidationUtil.assureIdConsistent;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
 
@@ -33,6 +39,22 @@ public class JspMealController {
     public String getMeals(Model model) {
         int userId = SecurityUtil.authUserId();
         List<MealTo> mealToList = MealsUtil.getTos(mealService.getAll(userId), SecurityUtil.authUserCaloriesPerDay());
+        model.addAttribute("meals", mealToList);
+        return "meals";
+    }
+
+    @GetMapping("/filter")
+    public String filter(@RequestParam Map<String, String> paramsMap,
+                         Model model) {
+        int userId = SecurityUtil.authUserId();
+
+        LocalDate startDate = parseLocalDate(paramsMap.get("startDate"));
+        LocalDate endDate = parseLocalDate(paramsMap.get("endDate"));
+        LocalTime startTime = parseLocalTime(paramsMap.get("startTime"));
+        LocalTime endTime = parseLocalTime(paramsMap.get("endTime"));
+
+        List<Meal> mealsDateFiltered = mealService.getBetweenInclusive(startDate, endDate, userId);
+        List<MealTo> mealToList = MealsUtil.getFilteredTos(mealsDateFiltered, SecurityUtil.authUserCaloriesPerDay(), startTime, endTime);
         model.addAttribute("meals", mealToList);
         return "meals";
     }

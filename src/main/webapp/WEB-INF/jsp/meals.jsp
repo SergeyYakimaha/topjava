@@ -5,6 +5,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<head>
+    <base href="${pageContext.request.contextPath}/topjava">
+</head>
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
@@ -12,9 +15,8 @@
 <section>
     <h3><a href="index.jsp">Home</a></h3>
     <hr/>
-    <h2>Meals</h2>
-    <form method="get" action="meals">
-        <input type="hidden" name="action" value="filter">
+    <h2><spring:message code="common.meals" /></h2>
+    <form method="get" action="meals/filter">
         <dl>
             <dt><spring:message code="mealFilter.startDate" /></dt>
             <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
