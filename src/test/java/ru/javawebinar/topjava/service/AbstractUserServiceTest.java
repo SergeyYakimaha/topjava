@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ActiveProfiles;
+import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
@@ -43,10 +44,14 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        if (!Arrays.asList(environment.getActiveProfiles()).contains(JDBC)) {
+        if (isJpaBased()) {
             cacheManager.getCache("users").clear();
             jpaUtil.clear2ndLevelHibernateCache();
         }
+    }
+
+    private boolean isJpaBased() {
+        return !Arrays.asList(environment.getActiveProfiles()).contains(JDBC);
     }
 
     @Test
@@ -106,6 +111,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
 
     @Test
     public void createWithException() throws Exception {
+        Assume.assumeTrue("Validation not supported (JPA only)", isJpaBased());
         validateRootCause(() -> service.create(new User(null, "  ", "mail@yandex.ru", "password", Role.ROLE_USER)), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new User(null, "User", "  ", "password", Role.ROLE_USER)), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new User(null, "User", "mail@yandex.ru", "  ", Role.ROLE_USER)), ConstraintViolationException.class);
