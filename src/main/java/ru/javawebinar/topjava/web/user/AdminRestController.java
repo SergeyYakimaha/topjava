@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 import ru.javawebinar.topjava.model.User;
 
 import java.net.URI;
@@ -30,9 +32,13 @@ public class AdminRestController extends AbstractUserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> createWithLocation(@RequestBody User user) {
         User created = super.create(user);
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{id}")
-                .buildAndExpand(created.getId()).toUri();
+//        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                .path(REST_URL + "/{id}")
+//                .buildAndExpand(created.getId()).toUri();
+        ServletUriComponentsBuilder servletUriComponentsBuilder = ServletUriComponentsBuilder.fromCurrentContextPath();
+        UriComponentsBuilder uriComponentsBuilder = servletUriComponentsBuilder.path(REST_URL + "/{id}/{id1}/{id2}");
+        UriComponents uriComponents = uriComponentsBuilder.buildAndExpand(created.getId(), 22, 33);
+        URI uriOfNewResource = uriComponents.toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 

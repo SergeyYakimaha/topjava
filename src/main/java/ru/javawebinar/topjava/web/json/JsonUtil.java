@@ -29,6 +29,7 @@ public class JsonUtil {
 
     public static <T> String writeValue(T obj) {
         try {
+            String s = getMapper().writeValueAsString(obj);
             return getMapper().writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             throw new IllegalStateException("Invalid write to JSON:\n'" + obj + "'", e);
