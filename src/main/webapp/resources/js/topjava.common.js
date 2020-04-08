@@ -1,4 +1,4 @@
-var context, form;
+let context, form;
 
 function makeEditable(ctx) {
     context = ctx;
@@ -27,7 +27,11 @@ function deleteRow(id) {
         url: context.ajaxUrl + id,
         type: "DELETE"
     }).done(function () {
-        updateTable();
+        if (context.ajaxUrl.equals("ajax/meals/"))
+            filter_params()
+        else {
+            updateTable();
+        }
         successNoty("Deleted");
     });
 }
