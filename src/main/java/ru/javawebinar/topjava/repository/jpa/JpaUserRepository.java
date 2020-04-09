@@ -29,6 +29,15 @@ public class JpaUserRepository implements UserRepository {
 
     @Override
     @Transactional
+    public void setUserState(boolean state, int id) {
+        em.createNamedQuery(User.SET_STATE)
+                .setParameter("id", id)
+                .setParameter("state", state)
+                .executeUpdate();
+    }
+
+    @Override
+    @Transactional
     public User save(User user) {
         if (user.isNew()) {
             em.persist(user);

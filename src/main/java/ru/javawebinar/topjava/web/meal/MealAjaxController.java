@@ -52,14 +52,11 @@ public class MealAjaxController extends AbstractMealController {
     }
 
     @GetMapping("/filter")
-    public List<MealTo> getBetween(@RequestParam @Nullable String startDate,
-                                   @RequestParam @Nullable String startTime,
-                                   @RequestParam @Nullable String endDate,
-                                   @RequestParam @Nullable String endTime) {
-        LocalDate startDate_ = parseLocalDate(startDate);
-        LocalDate endDate_ = parseLocalDate(endDate);
-        LocalTime startTime_ = parseLocalTime(startTime);
-        LocalTime endTime_ = parseLocalTime(endTime);
-        return super.getBetween(startDate_, startTime_, endDate_, endTime_);
+    public List<MealTo> getBetween(@RequestParam @Nullable LocalDate startDate,
+                                   @RequestParam @Nullable LocalDate endDate,
+                                   @RequestParam @Nullable LocalTime startTime,
+                                   @RequestParam @Nullable LocalTime endTime) {
+        return super.getBetween(startDate, startTime, endDate, endTime);
     }
+
 }

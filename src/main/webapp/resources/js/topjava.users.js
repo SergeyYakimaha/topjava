@@ -39,4 +39,20 @@ $(function () {
             })
         }
     );
+
+    $(":checkbox").click(function() {
+        update($(this).attr("id"), this.checked);
+    });
+
 });
+
+function update(id, state) {
+    $.ajax({
+        type: "POST",
+        url: context.ajaxUrl + id + "/state",
+        data: {state: state}
+    }).done(function (data) {
+        updateTable_(data);
+        successNoty((state) ? "Запись активирована" : "Запись деактивирована");
+    });
+}

@@ -28,6 +28,11 @@ public class UserService {
     }
 
     @CacheEvict(value = "users", allEntries = true)
+    public void setUserState(boolean state, int id) {
+        repository.setUserState(state, id);
+    }
+
+    @CacheEvict(value = "users", allEntries = true)
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
     }

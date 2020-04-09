@@ -26,14 +26,18 @@ function deleteRow(id) {
     $.ajax({
         url: context.ajaxUrl + id,
         type: "DELETE"
-    }).done(function () {
-        if (context.ajaxUrl.equals("ajax/meals/"))
-            filter_params()
-        else {
-            updateTable();
-        }
+    }).done(function (data) {
+        updateTable_(data);
         successNoty("Deleted");
     });
+}
+
+function updateTable_(data) {
+    if (context.ajaxUrl === "ajax/meals/") {
+        filter_params(); }
+    else {
+        updateTable();
+    }
 }
 
 function updateTable() {
@@ -47,9 +51,9 @@ function save() {
         type: "POST",
         url: context.ajaxUrl,
         data: form.serialize()
-    }).done(function () {
+    }).done(function (data) {
         $("#editRow").modal("hide");
-        updateTable();
+        updateTable_(data);
         successNoty("Saved");
     });
 }
