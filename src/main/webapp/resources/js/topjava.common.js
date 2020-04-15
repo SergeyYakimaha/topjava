@@ -11,9 +11,20 @@ function makeEditable(ctx) {
     $.ajaxSetup({cache: false});
 }
 
+function setElementName() {
+    // let editRow = $('#editRow');
+    // editRow.find(":button").html("5555");
+    // $("#modalTitle button").each(function (i, elem) {
+    //     if ($(elem).id === "common.saved") {
+    //         $(elem).val("100");
+    //     }
+    // })
+}
+
 function add() {
     $("#modalTitle").html(i18n["addTitle"]);
     form.find(":input").val("");
+    setElementName();
     $("#editRow").modal();
 }
 
