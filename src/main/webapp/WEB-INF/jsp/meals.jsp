@@ -118,7 +118,7 @@
                 </button>
                 <button type="button" class="btn btn-primary" id="common.saved" onclick="save()">
                     <span class="fa fa-check"></span>
-<%--                    <spring:message code="common.save"/>--%>
+                    <spring:message code="common.save"/>
                 </button>
             </div>
         </div>
