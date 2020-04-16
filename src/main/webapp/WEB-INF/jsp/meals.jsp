@@ -94,7 +94,7 @@
 
                     <div class="form-group">
                         <label for="datetimepicker" class="col-form-label"><spring:message code="meal.dateTime"/></label>
-                        <input type="text" class="form-control" id="datetimepicker" name="dateTime"
+                        <input type="text" class="form-control" id="datetimepicker" autocomplete="off" name="dateTime"
                                placeholder="<spring:message code="meal.dateTime"/>">
                     </div>
 
